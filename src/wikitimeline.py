@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import submodules
+import pretty
 
 class User:
 	def __init__(self,username):
@@ -28,6 +29,7 @@ class User:
 	def pretty(self):
 		"""Returns natural language summary of the user's
 		contribution history."""
+		return pretty.prettify(user=self.username,userdata=self.userdata)
 
 
 if __name__ == '__main__':
@@ -35,3 +37,4 @@ if __name__ == '__main__':
 	data = User(username=sys.argv[1])
 	data.load(depth=sys.argv[2])
 	print data.raw()
+	print data.pretty()
