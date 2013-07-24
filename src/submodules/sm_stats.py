@@ -4,9 +4,12 @@
 
 DEPTH = 1
 
+import config
+site = config.site
+
 class JuniorCollector():
 	def __init__(self,user):
 		self.user = user
 
 	def raw(self):
-		return {'sample':'data'}
+		return {'sample':site.Pages['Example']}

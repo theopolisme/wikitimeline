@@ -1,6 +1,5 @@
 #!/usr/bin/env python
 
-import mwclient
 import submodules
 
 class User:
