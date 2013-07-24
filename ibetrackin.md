@@ -1,0 +1,19 @@
+What will be taken into account
+==
+**Please help to expand this list.**
+
+- [ ] Namespace distribution
+- [ ] Automated tool usage
+ - [ ] Antivandalism
+- [ ] Content creations
+ - [ ] Total number of pages
+ - [ ] Promoted content (DYK, GA, FA)
+ - [ ] AfC vs mainspace
+- [ ] WikiProjects
+ - [ ] Joining
+ - [ ] Participating in discussions
+- [ ] Permissions
+ - [ ] RfA, RfB, PERM
+- [ ] New Pages Patrol
+ - [ ] Accuracy rates
+- [ ] *and more...*
