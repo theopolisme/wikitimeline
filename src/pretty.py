@@ -1,7 +1,9 @@
 #!/usr/bin/env python
 
 from datetime import datetime
+import inflect
 
+INFLECTOR = inflect.engine()
 NOW = datetime.now()
 
 def andlist(list):
@@ -24,21 +26,14 @@ def andlist(list):
 def prettify(user,userdata):
 	"""Given a dict of data, returns prettified unicode!"""
 	gender = userdata['gender']
+	global INFLECTOR
 	if gender == "male":
-		singular = "he"
-		posessive = "his"
-		objective = "him"
-		has = "has"
+		INFLECTOR.gender('masculine')
 	elif gender == "female":
-		singular = "she"
-		posessive = "her"
-		objective = "her"
-		has = "has"
+		INFLECTOR.gender('feminine')
 	else:
-		singular = "they"
-		posessive = "their"
-		objective ="them"
-		has = "have"
+		INFLECTOR.gender('gender-neutral')
+
 
 	output = ""
 	output += ("{0} has been a Wikipedian for {1:,d} days (since {2}), accruing a total of "
@@ -52,6 +47,9 @@ def prettify(user,userdata):
 	output += "{0} currently {1} the {2} userright{3}.".format(
 		singular.capitalize(),
 		has,
+	output += "{0} currently {1} the {2} userright{3}. ".format(
+		INFLECTOR.singular_noun('they').capitalize(),
+		'have' if INFLECTOR.thegender == 'gender-neutral' else 'has',
 		andlist(userdata['rightschanges'][0]['cur']),
 		"" if len(userdata['rightschanges'][0]['cur']) == 1 else "s")
 
