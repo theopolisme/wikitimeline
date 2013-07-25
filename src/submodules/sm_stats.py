@@ -25,18 +25,19 @@ class JuniorCollector():
 		results['registration'] = dateutil.parser.parse(basedata['registration'])
 
 		# User rights changes
-		rightsevents = site.logevents(title="User:"+self.user,dir='newer',type='rights')
+		rightsevents = site.logevents(title="User:"+self.user,type='rights')
 		rightschanges = []
 		for event in rightsevents:
 			if event['action'] == 'rights':
-				new = Counter(event['rights']['new'].split(', '))
+				newbase = event['rights']['new'].split(', ')
+				new = Counter(newbase)
 				old = Counter(event['rights']['old'].split(', '))
 				diff = new-old
 				if len(list(diff.elements())) > 0:
-					rightschanges.append({'change':'add','rights':list(diff.elements()),'comment':event['comment'],'timestamp':event['timestamp']})
+					rightschanges.append({'cur':newbase,'change':'add','rights':list(diff.elements()),'comment':event['comment'],'timestamp':event['timestamp']})
 				diff2 = old-new
 				if len(list(diff2.elements())) > 0:
-					rightschanges.append({'change':'remove','rights':list(diff2.elements()),'comment':event['comment'],'timestamp':event['timestamp']})
+					rightschanges.append({'cur':newbase,'change':'remove','rights':list(diff2.elements()),'comment':event['comment'],'timestamp':event['timestamp']})
 		results['rightschanges'] = rightschanges
 
 		#!todo block log
