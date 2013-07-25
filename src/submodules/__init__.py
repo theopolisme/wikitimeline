@@ -27,18 +27,24 @@ class Collector():
 
 	def collect(self):
 		userdata = {}
+		timeline = []
 		sys.path.append(os.path.dirname(__file__))
 		for modulen in MODULES:
 			print "Adding data from {}.".format(modulen)
 			module = __import__(modulen)
 			if module.DEPTH <= self.depth:
 				script = module.JuniorCollector(self.user)
-				output = script.raw()
+				output,newtime = script.raw()
 				userdata = dict(userdata.items() + output.items())
+				timeline = timeline + newtime
 			else:
 				print "Skipping {}; too detailed for current depth.".format(modulen)
 		sys.path.remove(os.path.dirname(__file__))
 		self.userdata = userdata
+		self.timeline = timeline
 
-	def output(self):
-		return self.userdata
+	def output(self,type="userdata"):
+		if type == "timeline":
+			return self.timeline
+		elif type == "userdata":
+			return self.userdata

@@ -18,8 +18,8 @@ class User:
 		userdata = {}
 		collector = submodules.Collector(user=self.username,depth=depth)
 		collector.collect()
-		self.userdata = collector.output()
-
+		self.userdata = collector.output("userdata")
+		self.timeline = collector.output("timeline")
 
 	def raw(self):
 		"""Returns a raw dict of data points from the
@@ -29,8 +29,7 @@ class User:
 	def pretty(self):
 		"""Returns natural language summary of the user's
 		contribution history."""
-		return pretty.prettify(user=self.username,userdata=self.userdata)
-
+		return pretty.prettify(user=self.username,userdata=self.userdata,timeline=self.timeline)
 
 if __name__ == '__main__':
 	import sys
